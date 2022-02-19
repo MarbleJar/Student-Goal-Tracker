@@ -27,8 +27,7 @@ const goalsSchema = new Schema({
 });
 
 // create a collection instance of the model 
-const Goals = mongoose.model('goals', goalsSchema);
+const Goal = mongoose.model('goals', goalsSchema);
 
 
-module.exports = {Student, Goals};
-
+module.exports = {Student, Goal};
