@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 // ------ FILE FOR EXPRESS SERVER ------
 
 // Import Express module: 
+=======
+// Import Express
+>>>>>>> dev
 const express = require('express');
 // Assign express methods to "app" variable
 const app = express();
@@ -15,6 +19,7 @@ const {verifyUser} = require('./controllers/userControllers.js')
 
 const PORT = 3000;
 
+<<<<<<< HEAD
 
 // Import mongoose modules:
 // const mongoose = require('mongoose');
@@ -111,3 +116,16 @@ app.post('/api/login',
 // });
 
 app.listen(PORT, () => console.log(`MarbleJar app listening on port ${PORT}!`));
+=======
+// Connecting to Mongoose through Atlas hosting site
+mongoose.connect('mongodb+srv://marbleJarTeam:ilovemarbles@student-goal-tracker.zh4sx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: false}, {useUnifiedTopology: true});
+
+// confirm you are connected to the db
+mongoose.connection.once('open', () => {
+  console.log('Connected to MarbleJar Database');
+})
+
+
+
+app.listen(PORT, () => console.log('SERVER UP AND RUNNING'));
+>>>>>>> dev
