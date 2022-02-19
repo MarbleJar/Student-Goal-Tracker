@@ -18,9 +18,10 @@ const Student = mongoose.model('students', studentSchema);
 // create a goal schema
 const goalsSchema = new Schema({
   description: {type: String, required: true}, 
-  dueDate: Number,
+  dueDate: Date,
+  status: String,
   //behaves like a foreign key referencing the 'students' collection
-  status: {
+  student: {
     type: Schema.Types.ObjectId,
     ref: 'students'
   }
