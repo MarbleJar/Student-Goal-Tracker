@@ -1,0 +1,46 @@
+{
+  "name": "student-goal-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev-client": "NODE_ENV=development webpack-dev-server --open --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarbleJar/Student-Goal-Tracker.git"
+  },
+  "author": "Diana R Kim, Michael Lakeram, Rehema Armorer, Michael Noah, Nahreen Anam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarbleJar/Student-Goal-Tracker/issues"
+  },
+  "homepage": "https://github.com/MarbleJar/Student-Goal-Tracker#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.6.0",
+    "eslint": "^8.9.0",
+    "eslint-plugin-react": "^7.28.0",
+    "html-webpack-plugin": "^5.5.0",
+    "isomorphic-fetch": "^3.0.0",
+    "nodemon": "^2.0.15",
+    "react-hot-loader": "^4.13.0",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "html-loader": "^3.1.0",
+    "mongoose": "^6.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
