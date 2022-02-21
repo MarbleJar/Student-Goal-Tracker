@@ -23,7 +23,7 @@ module.exports = {
     rules: [
       {
         // Select files ending in .js or .jsx
-        test: /.(js|jsx)$/,
+        test: /\.(js|jsx)$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         use: {
           loader: 'babel-loader', // might need direct path './node_modules/babel-loader'
@@ -70,6 +70,9 @@ module.exports = {
     }),
   ],
   devServer: {
+    host: 'localhost',
+    port: 8080,
+    hot: true,
     // its where the bundle.js will live on RAM during development
     static: {
       publicPath: '/build',
@@ -78,7 +81,7 @@ module.exports = {
     // set up the proxy such that you can call API requests from hot-reload webpack server to the express back-end server
     // aka fetch req. from localhoast:8080/api/* redirect to localhost:3000/api/*
     proxy: {
-      '/api/**': 'http://localhost:3000',
+      '/': 'http://localhost:3000',
       secure: false,
     } 
   },
