@@ -1,0 +1,59 @@
+body {
+
+  .MainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .graph-header {
+    text-align: center;
+    font-weight:bold;
+    background-color:rgb(207, 234, 241);
+    height: 440px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 50px;
+  }
+  .graph-outer {
+    border: 10px solid rgba(0, 0, 0, 0.334);
+    border-top: 0px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+
+    margin: 10px;
+    height: 400px;
+    width: 300px;
+    display: flex;
+    align-content: flex-end;
+    flex-direction: column-reverse;
+    align-items: center;
+    overflow: hidden;
+
+    box-shadow: 10px 10px 10px rgb(216, 220, 221);
+  }
+
+  .graph-bar{
+    height: 80%;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.334);
+    background-image: url("marbles.png");
+    background-size: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .graph-label {
+    margin-top: 5px;
+    border: 2px solid rgba(246, 246, 246, 0.801);
+    border-radius: 5px;
+    background: rgba(246, 246, 246, 0.801);
+    width: 20%;
+    text-align: center;
+    font-weight:bold
+    
+  }
+
+}

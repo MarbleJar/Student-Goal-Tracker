@@ -40,7 +40,7 @@ userController.verifyUser = (req, res, next) => {
         firstName: user.firstName
       }
     }
-    next();
+    return next();
   })
 };
 

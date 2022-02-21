@@ -1,14 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import App from './components/App';
+import { Provider } from 'react-redux';
+import App from './App.jsx';
+import store from './store.js';
 
 // so that webpack can bundle styles 
 // import style from './style.css';
 
 render(
-  // render main top component App
-//   <App />,
-  // attach the index.js on HTML by the root
+ <Provider store ={store}>
+   <App/>
+ </Provider>,
   document.getElementById('root')
 );
 
