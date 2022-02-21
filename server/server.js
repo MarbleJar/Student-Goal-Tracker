@@ -66,8 +66,9 @@ app.post('/api/signup',
 //----- GET STUDENT GOALS ROUTE HANDLER-----
 // http://localhost:3000/api/getStudentGoals?studentId='ID'
 app.get('/api/getStudentGoals/:studentId', 
+  findStudentGoals,
   (req, res) => {
-  res.status(200).json();
+    res.status(200).json(res.locals.goalsResponse);
   });
 
 
