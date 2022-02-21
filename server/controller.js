@@ -11,7 +11,7 @@ studentController.getAllStudents = next => {
 
 studentController.getStudent = (req, res, next) => {
 
-  console.log('request body in studentController.getStudent is: ', request.body);
+  console.log('request body in studentController.getStudent is: ', req.body);
 
   // object destructuring for cleaner code; using the property name in req.body to create variable names representing what the value of that property name is
   const { username, password } = req.body;
@@ -24,9 +24,19 @@ studentController.getStudent = (req, res, next) => {
   }
 
   Student.findOne(student, (err, user) => {
+
     if (err) {
-      // throw Error('error trying to grab student login info from mongoDB')
-      res.redirect('incorrect password entered');
+      return next({isLoggedIn: false, errorMessage: 'incorrect username and/or password entered'});
     }
+  
+    console.log('what is user in findOne query: ', user);
+    res.locals.user = {
+      isLoggedIn: true, 
+      userId: 'database ID for that student', 
+      firstName: 'value from database',
+    }
+    return next();
   })
 }
+
+module.exports = studentController;

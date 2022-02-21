@@ -44,13 +44,12 @@ app.get('/', (req, res) => {
 
 //** LOGIN ROUTES */
 app.post('/api/login', 
-  // middleware to start a session
-  // middleware to generate a cookie upon successful login
   // middleware that gets the correct student information from the database upon successful login
+  studentController.getStudent(),
     // would you want to redirect the student to their specific studentgoals view based upon their id?
     // what would the logic for this look like? 
   (req, res) => {
-    res.status(200).redirect('redirect to route that gets the student progress based on their unique id stored as part of their mongoose document')
+    res.status(200).send(res.locals.user);
   });
 
 app.post('/api/logout',
