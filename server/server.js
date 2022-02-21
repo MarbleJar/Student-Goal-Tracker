@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 // ------ FILE FOR EXPRESS SERVER ------
 
 // Import Express module: 
-=======
-// Import Express
->>>>>>> dev
 const express = require('express');
 // Assign express methods to "app" variable
 const app = express();
@@ -15,75 +11,65 @@ const cookieParser = require('cookie-parser');
 // Import bodyParser:
 
 // Import useControllers:
-const {verifyUser} = require('./controllers/userControllers.js')
+const { verifyUser, createUser } = require('./controllers/userControllers.js');
+const { findStudentGoals } = require('./controllers/goalControllers.js');
 
-const PORT = 3000;
-
-<<<<<<< HEAD
 
 // Import mongoose modules:
-// const mongoose = require('mongoose');
-
-// if we end up moduralizing our server then use the links below to require in the relevant router/controller files:
-
-// const studentController = require('');
-// const cookieController = require('');
-// const sessionController = require('');
-
-// logic to connect mongoose (might want to have a separate mongoose model file for this?)
-// const mongooseURI = 'insert mongoose uri here';
-
+const mongoose = require('mongoose');
+// Connecting to Mongoose through Atlas hosting site: 
+const mongooseURI = 'mongodb+srv://marbleJarTeam:ilovemarbles@student-goal-tracker.zh4sx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+mongoose.connect(mongooseURI, {useNewUrlParser: false}, {useUnifiedTopology: true});
 // mongoose.connect(`${mongooseURI}`, { useNewUrlParser: true, useUnifiedTopology: true });
-// mongoose.connection.once('open', () => {
-//   console.log('Connected to Pink Fairy Armadillo\'s database');
-// });
+
+mongoose.connection.once('open', () => console.log('Connected to MarbleJar Database'));
 
 
 
-//---- PARCERS ----
-// JSON parser for incomming requests:
+//----- PARCERS -----
+// Parcer for JSON requests:
 app.use(express.json());
 // Parcer for cookies:
 app.use(cookieParser());
-
-// urlencoded parser for incomming requests. Built-in middleware function in Express. It parses requests with urlencoded payloads and is based on body-parser:
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-
-app.get('/', (req, res) => {
-  res.render('../client/index.html');
-  res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'))
-});
+// Parcer for urlencoded requests:
+app.use(express.urlencoded()); // Best practice note: body-parser is deprecated for Express version 4.16+, use express.urlencoded() instead
 
 
-//---- LOGIN ROUTE HANDLER ----
-app.post('/api/login',
-  // Middleware to verify if user credentials exist in the database
-  verifyUser,
-  // ADD: middleware to generate a cookie upon successful login
-  // ADD: middleware middleware that gets the correct student information from the database upon successful login
-  //   would you want to redirect the student to their specific studentgoals view based upon their id?
-  //   what would the logic for this look like? 
+
+//----- LOGIN ROUTE HANDLER -----
+app.post('/api/login', verifyUser,
   (req, res) => {
-    res.status(200).send('TEST!')
-    // if (res.locals.error) res.
-    // res.status(200).send('TEST')
+  // If login is unsuccessful, returns: {isLoggedIn: false, errorMessage}
+  if (res.locals.loginError) res.status(401).json(res.locals.loginError);
+
+  // If login is successful, returns: {isLoggedIn: true, userId, firstName}
+  res.status(200).json(res.locals.loginResponse);
+});
+// add: middleware to generate a cookie upon successful login
+// add: middleware middleware that gets the correct student information from the database upon successful login
+//   would you want to redirect the student to their specific studentgoals view based upon their id?
+
+
+//----- LOGOUT ROUTE HANDLER -----
+app.post('/api/logout', (req, res) => res.status(200).send());
+  // some middleware to stop the current session maybe?
+  // would this just redirect the user to the login view again?
+  
+
+//----- SIGNUP ROUTE HANDLER ----- (used for testing)
+app.post('/api/signup',
+  createUser,
+  (req, res) => res.status(200).json(res.locals.newUser));
+  
+
+
+//----- GET STUDENT GOALS ROUTE HANDLER-----
+// http://localhost:3000/api/getStudentGoals?studentId='ID'
+app.get('/api/getStudentGoals/:studentId', 
+  (req, res) => {
+  res.status(200).json();
   });
 
-// app.post('/api/logout',
-// some middleware to stop the current session maybe?
-// would this just redirect the user to the login view again?
-// (req, res) => {
-//   res.status(200).redirect('redirect to the login view');
-// })
-
-//** GET STUDENT */
-// http://localhost:3000/api/getStudentGoals?studentId='ID'
-// app.get('/api/getStudentGoals/:studentId', 
-//   // middleware  
-//   (req, res) => {
-//   res.status(200).json();
-// });
 
 //** UPDATE STUDENT INFO */
 // http://localhost:3000/api/updateGoal?goalId='ID'
@@ -101,31 +87,28 @@ app.post('/api/login',
 //   res.status(200).json();
 // });
 
-// Global error handler
-// app.use((err, req, res, next) => {
-//   const defaultErr = {
-//     log: 'Global error handler identified an error within the middleware',
-//     status: 400,
-//     message: { err: 'An error occurred' },
-//   };
-//   const errorObj = Object.assign({}, defaultErr, err);
-  
-//   console.log(errorObj.log);
 
-//   return res.status(errorObj.status).json(errorObj.message);
-// });
 
+//----- LANDING PAGE ROUTE HANDLER -----
+// should be handeled by front end server
+app.get('/', (req, res) => {
+  res.render('../client/index.html');
+  res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
+});
+
+
+
+//----- GLOBAL ERROR HANDLER -----
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Global error handler identified an error within the middleware',
+    status: 400,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);  
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
+});
+
+const PORT = 3000;
 app.listen(PORT, () => console.log(`MarbleJar app listening on port ${PORT}!`));
-=======
-// Connecting to Mongoose through Atlas hosting site
-mongoose.connect('mongodb+srv://marbleJarTeam:ilovemarbles@student-goal-tracker.zh4sx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: false}, {useUnifiedTopology: true});
-
-// confirm you are connected to the db
-mongoose.connection.once('open', () => {
-  console.log('Connected to MarbleJar Database');
-})
-
-
-
-app.listen(PORT, () => console.log('SERVER UP AND RUNNING'));
->>>>>>> dev
