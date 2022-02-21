@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import MainContainer from './containers/MainContainer.jsx'
 import { Provider } from 'react-redux';
+import './style/style.scss';
+
 
 class App extends Component {
     constructor(props) {

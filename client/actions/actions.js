@@ -40,6 +40,8 @@ export const processLogout = async (dispatch) => {
   // serverResponse = await fetch('/api/logout', requestOptions);
   // serverResponse = await serverResponse.json();
 
+
+
   dispatch({
     type: types.LOGGED_OUT,
     payload: null
@@ -67,10 +69,30 @@ export const markComplete = async (dispatch, goalId, index) => {
   // Fake server reponse for testing
   let serverResponse = {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Complete', _id: 'abcd'};
 
+  // Pull updated class status to update state
+  getClassStatus(dispatch);
 
   dispatch({
     type: types.UPDATE_GOAL,
     payload: {response: serverResponse, index: index}
+  });
+
+}
+
+export const getClassStatus = async (dispatch) => {
+  
+  // TO TEST WITH SERVER: Un-comment these two lines
+  // const path = '/api/getClassProgress/'
+  // let serverResponse = await fetch(path);
+  // serverResponse = await serverResponse.json();
+  
+
+  // Fake server reponse for testing
+  let serverResponse = {totalPending: 50, totalComplete: 100};
+
+  dispatch({
+    type: types.GET_CLASS,
+    payload: {response: serverResponse}
   });
 
 }

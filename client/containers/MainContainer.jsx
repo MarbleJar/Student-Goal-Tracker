@@ -27,16 +27,17 @@ const mapDispatchToProps = dispatch => ({
   loginChange: (value, field) => dispatch(actions.editFieldActionCreator(value, field)),
   processLogin: (username, password) => actions.processLogin(dispatch, username, password),
   processLogout: () => actions.processLogout(dispatch),
-  markComplete: (goalId, index) => actions.markComplete(dispatch, goalId, index)
+  markComplete: (goalId, index) => actions.markComplete(dispatch, goalId, index),
+  getClassStatus: () => actions.getClassStatus(dispatch)
 });
 
 class MainContainer extends Component {
 
   render() {
-    return(<div>Main Container
+    return(<div className = "MainContainer">Main Container
       <Login loginData = {this.props.loginData} editHandler = {this.props.loginChange} processLogin = {this.props.processLogin} processLogout = {this.props.processLogout}/>
       <StudentGoals goalsData = {this.props.goalsData} studentStatus = {this.props.studentStatus} markComplete = {this.props.markComplete} />
-      <MarbleJar classStatus = {this.props.classStatus} />
+      <MarbleJar classStatus = {this.props.classStatus} getClassStatus = {this.props.getClassStatus} />
     </div>);
   }
 }

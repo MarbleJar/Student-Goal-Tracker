@@ -68,8 +68,13 @@ const reducer = (state = initialState, action) => {
       };
     }
     case types.GET_CLASS: {
+      let classStatus = {...state.classStatus};
+      classStatus.totalPending = action.payload.response.totalPending;
+      classStatus.totalComplete = action.payload.response.totalComplete;
+
       return {
-        ...state
+        ...state,
+        classStatus
       };
     }
 
