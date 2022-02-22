@@ -7,12 +7,12 @@ const Schema = mongoose.Schema;
 const studentSchema = new Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  userName: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
 });
 
 // create a collection instance of the model
-const Student = mongoose.model('students', studentSchema);
+const Student = mongoose.model('students2', studentSchema);
 
 
 // create a goal schema

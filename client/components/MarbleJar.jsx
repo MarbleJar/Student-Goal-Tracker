@@ -18,7 +18,7 @@ class MarbleJar extends Component {
     this.props.getClassStatus();
 
   }
-  
+
   render() {
     console.log(this.props.classStatus);
     let percent = (this.props.classStatus.totalComplete / (this.props.classStatus.totalComplete + this.props.classStatus.totalPending))*100;
@@ -30,7 +30,11 @@ class MarbleJar extends Component {
     };
 
     return(
+<<<<<<< HEAD
       <div class = 'title'>Class Status
+=======
+      <div>
+>>>>>>> dev
       <div className = "graph-header">
         Marble Jar
         <div className = "graph-outer">
