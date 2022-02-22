@@ -1,11 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Dosis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Dosis&family=Indie+Flower&family=Signika&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Dosis&family=Indie+Flower&family=PT+Sans&family=Signika&display=swap');
+
+
 body {
+  .title {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Signika', sans-serif;
+    color: rgb(85, 81, 81)
+  }
+  background-color: #fff;
+
+  .signIn {
+    border-color: rgb(182, 178, 178); 
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+      .username {
+        margin-right: 5px;
+      }
+      .password {
+        margin-right: 5px;
+      }
+      .submit {
+        background-color: #d5ecf8;
+        border-color: #d5ecf8;
+        border-radius: 4px;
+        font-family: 'cabin', sans-serif;
+      }
+  }
 
   .MainContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Signika', sans-serif;
+  
+  .GoalTable {
+    width: 400px; 
+    height: 400px;
+    row-gap: 4em; 
+      .TableRow {
+        font-family: 'PT Sans', sans-serif;
+        text-align: left;
+      }
+      .CheckBox {
+        box-sizing: border-box;
+        height: 20px;
+        width: 20px;
+      }
+  }
+      
   }
   .graph-header {
+    margin-top: 10px;
     text-align: center;
     font-weight:bold;
     background-color:rgb(207, 234, 241);

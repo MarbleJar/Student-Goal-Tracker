@@ -30,7 +30,11 @@ class MarbleJar extends Component {
     };
 
     return(
+<<<<<<< HEAD
+      <div class = 'title'>Class Status
+=======
       <div>
+>>>>>>> dev
       <div className = "graph-header">
         Marble Jar
         <div className = "graph-outer">
