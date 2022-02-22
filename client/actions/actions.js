@@ -7,21 +7,21 @@ export const editFieldActionCreator = (value, field) => ({
 });
 
 export const processLogin = async (dispatch, enteredUsername, enteredPassword) => {
-    const bodyData = {"username": enteredUsername, "password": enteredPassword}
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(bodyData)
+      body: {username: enteredUsername, password: enteredPassword}
     };
   
     let serverResponse
     
     // TO TEST WITH SERVER: Un-comment these two lines
-    serverResponse = await fetch('/api/login', requestOptions);
-    serverResponse = await serverResponse.json();
+    // serverResponse = await fetch('/api/login', requestOptions);
+    // serverResponse = await serverResponse.json();
 
     // Testing use only
-    // serverResponse  = {isLoggedIn: true, userId: 'test', firstName: 'John'}
+    serverResponse  = {isLoggedIn: true, userId: 'test', firstName: 'John'}
 
     dispatch({
       type: types.LOGGED_IN,
@@ -37,7 +37,8 @@ export const processLogout = async (dispatch) => {
   };
 
   // TO TEST WITH SERVER: Un-comment these two lines
-  const serverResponse = await fetch('/api/logout', requestOptions);
+  // serverResponse = await fetch('/api/logout', requestOptions);
+  // serverResponse = await serverResponse.json();
 
 
 
