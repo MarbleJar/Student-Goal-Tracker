@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
 class MainContainer extends Component {
 
   render() {
-    return(<div className = "MainContainer">Main Container
+    return(<div className = "MainContainer">Sign in Below to See Your Goals!
       <Login loginData = {this.props.loginData} editHandler = {this.props.loginChange} processLogin = {this.props.processLogin} processLogout = {this.props.processLogout}/>
       <StudentGoals goalsData = {this.props.goalsData} studentStatus = {this.props.studentStatus} markComplete = {this.props.markComplete} />
       <MarbleJar classStatus = {this.props.classStatus} getClassStatus = {this.props.getClassStatus} />

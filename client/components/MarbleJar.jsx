@@ -30,7 +30,7 @@ class MarbleJar extends Component {
     };
 
     return(
-      <div>Class Status 
+      <div class = 'title'>Class Status
       <div className = "graph-header">
         Marble Jar
         <div className = "graph-outer">

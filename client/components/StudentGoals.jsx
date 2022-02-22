@@ -23,23 +23,21 @@ class StudentGoals extends Component {
     console.log(this.props.goalsData);
    
     this.props.goalsData.forEach((element, index) => {
-      let thisRow = <tr key={index}>
+      let thisRow = <tr key={index} class = "TableRow">
         <td>{element.description}</td>
         <td>{element.due_date}</td>
         <td>{element.status}</td>
-        <td><input type = 'button' onClick = {() => {this.props.markComplete(element._id, index)} }/></td>
+        <td><input class = "CheckBox" type = 'checkbox' onClick = {() => {this.props.markComplete(element._id, index)} }/></td>
       </tr>
       displayArray.push(thisRow);
     })
 
-    
 
-    
 
     // Return should include the array of table rows
     return(
-      <div>Student Goals
-        <table>
+      <div class> <h3 class = 'title'>Student Goals</h3>
+        <table class = "GoalTable">
           <tbody>
             {displayArray}
           </tbody>
