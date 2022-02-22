@@ -28,17 +28,30 @@ const mapDispatchToProps = dispatch => ({
   processLogin: (username, password) => actions.processLogin(dispatch, username, password),
   processLogout: () => actions.processLogout(dispatch),
   markComplete: (goalId, index) => actions.markComplete(dispatch, goalId, index),
-  getClassStatus: () => actions.getClassStatus(dispatch)
+  getClassStatus: () => actions.getClassStatus(dispatch),
+  getGoals: (studentId) => actions.getGoals(dispatch, studentId)
 });
 
 class MainContainer extends Component {
 
+
   render() {
+    console.log(this.props);
+
+    let output;
+    if (this.props.loginData.isLoggedIn) {
+      console.log("current user...");
+      console.log(this.props.loginData);
+      output = <>
+        <StudentGoals goalsData = {this.props.goalsData} studentStatus = {this.props.studentStatus} markComplete = {this.props.markComplete} getGoals = {() => this.props.getGoals(this.props.loginData.userId)} />
+        <MarbleJar classStatus = {this.props.classStatus} getClassStatus = {this.props.getClassStatus} />
+      </>
+    }
+
     return(<div className = "MainContainer">Sign in Below to See Your Goals!
       <Login loginData = {this.props.loginData} editHandler = {this.props.loginChange} processLogin = {this.props.processLogin} processLogout = {this.props.processLogout}/>
-      <StudentGoals goalsData = {this.props.goalsData} studentStatus = {this.props.studentStatus} markComplete = {this.props.markComplete} />
-      <MarbleJar classStatus = {this.props.classStatus} getClassStatus = {this.props.getClassStatus} />
-    </div>);
+      {output}
+    </div>)
   }
 }
 

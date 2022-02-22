@@ -31,6 +31,7 @@ mongoose.connection.once('open', () => console.log('Connected to MarbleJar Datab
 app.use(express.json());
 // Parcer for cookies:
 app.use(cookieParser());
+app.use(bodyParser());
 // Parcer for urlencoded requests:
 app.use(express.urlencoded()); // Best practice note: body-parser is deprecated for Express version 4.16+, use express.urlencoded() instead
 
@@ -104,7 +105,7 @@ app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Global error handler identified an error within the middleware',
     status: 400,
-    message: { err: 'An error occurred' },
+    message: { err: 'An error occurred from middleware' },
   };
   const errorObj = Object.assign({}, defaultErr, err);  
   console.log(errorObj.log);

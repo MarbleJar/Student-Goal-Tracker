@@ -65,8 +65,11 @@ const reducer = (state = initialState, action) => {
       };
     }
     case types.GET_GOALS: {
+      let goalsData = [...state.goalsData];
+      goalsData = action.payload;
       return {
-        ...state
+        ...state, 
+        goalsData
       };
     }
     case types.GET_CLASS: {

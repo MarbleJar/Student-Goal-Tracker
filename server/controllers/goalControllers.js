@@ -4,22 +4,21 @@ const { Goal } = require('../models/studentModels');
 const goalController = {};
 
 goalController.findStudentGoals = (req, res, next) => {
-  const { studentId } = req.parama;
+  // to get req.params to work we need to invoke bodyParser() in server.js file
+  const { studentId } = req.params;
+  console.log('req.params is: ', req.params);
 
-  Goal.find({ studentId }, (err, result) => {
+  Goal.find({ student: studentId }, (err, result) => {
     if (err) {
       return next({
         log: err.message,
         status: 400,
-        message: { err: 'Global error handler identified an error within the middleware'},
+        message: { err: err.message},
       });
     }
     console.log('result from goalController.findStudentGoals: ', result)
-    res.locals.goalsResponse = {
-      // description: result.data, 
-      // due_date: result.data, 
-      // status: String, _id,
-    }
+    res.locals.goalsResponse = result;
+    return next();
   });
 }
 

@@ -33,7 +33,7 @@ userController.verifyUser = (req, res, next) => {
       };
     }
     else {
-      console.log(user)
+      console.log('user id is: ', user._id)
       res.locals.loginResponse = {
         isLoggedIn: true,
         userId: user._id,

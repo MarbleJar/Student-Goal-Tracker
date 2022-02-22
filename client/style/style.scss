@@ -31,6 +31,12 @@ body {
       }
   }
 
+  .logOut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .MainContainer {
     display: flex;
     flex-direction: column;

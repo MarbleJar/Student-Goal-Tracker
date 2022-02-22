@@ -39,8 +39,6 @@ export const processLogout = async (dispatch) => {
   // TO TEST WITH SERVER: Un-comment these two lines
   const serverResponse = await fetch('/api/logout', requestOptions);
 
-
-
   dispatch({
     type: types.LOGGED_OUT,
     payload: null
@@ -63,7 +61,6 @@ export const markComplete = async (dispatch, goalId, index) => {
   // const path = '/api/updateGoal/' + goalId
   // let serverResponse = await fetch(path, requestOptions);
   // serverResponse = await serverResponse.json();
-  
 
   // Fake server reponse for testing
   let serverResponse = {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Complete', _id: 'abcd'};
@@ -94,4 +91,23 @@ export const getClassStatus = async (dispatch) => {
     payload: {response: serverResponse}
   });
 
+}
+
+export const getGoals = async(dispatch, studentId) => {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  console.log(studentId);
+  const path = '/api/getStudentGoals/' + studentId;
+  let serverResponse = await fetch(path);
+  console.log("GOALS SERVER RESPONSE");
+  console.log(serverResponse);
+  serverResponse = await serverResponse.json();
+
+  dispatch({
+    type: types.GET_GOALS,
+    payload: serverResponse
+  })
 }
