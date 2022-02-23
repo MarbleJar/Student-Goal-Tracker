@@ -1,6 +1,6 @@
 // ------ FILE FOR USER CONTROLLERS ------
 // Import Student model from models/userModels file:
-const { Student} = require('../models/studentModels');
+const { Student} = require('../models/studentModel');
 
 // Create userController object to store controller methods
 const userController = {};
@@ -46,6 +46,11 @@ userController.verifyUser = (req, res, next) => {
 
 //---- CREATE NEW USER CONTROLLER ----
 userController.createUser = (req, res, next) => {
+  console.log("entered createUser middleware")
+  console.log(req.body)
+  console.log(req.body.firstName)
+  // console.log(req.body)
+
   const newUser = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -55,8 +60,11 @@ userController.createUser = (req, res, next) => {
 
   Student.create(newUser, (err, newUserEntry) => {
     console.log(err)
-    if (err) return next({ message: { err: err.message } });
-    // MAKE SURE IT'S NOT CREATING USER W/ EXISTING USERNAME
+    if (err) {
+      console.log("experienced an error with create request") 
+      next({ message: { err: err.message } })
+    };
+    // MAKE SURE IT'S NOT CREATING USER W/ EXISTING USERNAME - already required that it's unique in schema
     res.locals.newUser = {
       firtName: newUserEntry.firstName,
       lastName: newUserEntry.lastName,

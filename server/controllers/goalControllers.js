@@ -1,14 +1,13 @@
-
-const { Goal } = require('../models/studentModels');
+const { Goal } = require('../models/goalModel');
 
 const goalController = {};
 
 goalController.findStudentGoals = (req, res, next) => {
   // to get req.params to work we need to invoke bodyParser() in server.js file
-  const { studentId } = req.params;
-  console.log('req.params is: ', req.params);
 
-  Goal.find({ student: studentId }, (err, result) => {
+  const { studentID } = req.params;
+
+  Goal.find({ student: studentID }, (err, result) => {
     if (err) {
       return next({
         log: err.message,
@@ -16,10 +15,29 @@ goalController.findStudentGoals = (req, res, next) => {
         message: { err: err.message},
       });
     }
-    console.log('result from goalController.findStudentGoals: ', result)
     res.locals.goalsResponse = result;
     return next();
   });
+}
+
+goalController.addGoals = (req, res, next) => {
+  // deconstruct req.body which will have userID, title, description, dueDate, status
+  const { title, description, dueDate } = req.body;
+  const { studentID } = req.params;
+    // syntax for the userID?
+  // default status = false
+  // mongoDB request (create) which will add the new goal
+  Goal.create({title, description, dueDate, status: false, studentID}, (err, result) => {
+     if (err) {
+      return next({
+        log: err.message,
+        status: 400,
+        message: { err: err.message },
+      });
+    }
+    return next();
+  });
+    // check for an error, if not then next()
 }
 
 module.exports = goalController;
