@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const { verifyUser, createUser } = require('./controllers/userControllers.js');
-const { findStudentGoals, addGoals } = require('./controllers/goalControllers.js');
+const { findStudentGoals, addGoals, switchStatus, deleteGoal } = require('./controllers/goalControllers.js');
 
 // CHANGE URL BELOW!!
 const mongooseURI = 'mongodb+srv://rfbeier:Radar1598@cluster0.spq6q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -56,9 +56,19 @@ app.get('/api/getStudentGoals/:studentID',
     res.status(200).json(res.locals.goalsResponse);
   });
 
-
+//-------ADD GOAL TO DB AND RETURN UPDATED------
 app.post('/api/newGoal/:studentID', addGoals, findStudentGoals, (req, res) => {
-  console.log("got through middleware for adding goals")
+  res.status(200).json(res.locals.goalsResponse);
+})
+
+//--------CHANGE THE STATUS OF A GOAL BETWEEN COMPLETED OR INCOMPLETE------
+//currently using 2 pieces of middleware to handle, but can be reduced to one if saved in state on front end
+app.put('/api/switchStatus/:studentID', switchStatus, findStudentGoals, (req, res) => {
+  res.status(200).json(res.locals.goalsResponse);
+})
+
+
+app.delete('/api/deleteGoal/:studentID', deleteGoal, findStudentGoals, (req, res) => {
   res.status(200).json(res.locals.goalsResponse);
 })
 
