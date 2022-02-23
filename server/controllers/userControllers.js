@@ -1,5 +1,4 @@
 // ------ FILE FOR USER CONTROLLERS ------
-
 // Import Student model from models/userModels file:
 const { Student} = require('../models/studentModels');
 
@@ -57,7 +56,7 @@ userController.createUser = (req, res, next) => {
   Student.create(newUser, (err, newUserEntry) => {
     console.log(err)
     if (err) return next({ message: { err: err.message } });
-    
+    // MAKE SURE IT'S NOT CREATING USER W/ EXISTING USERNAME
     res.locals.newUser = {
       firtName: newUserEntry.firstName,
       lastName: newUserEntry.lastName,
@@ -67,7 +66,6 @@ userController.createUser = (req, res, next) => {
     return next()
   })
 }
-
 
 //---- GET STUDENT GOALS CONTROLLER -----
 

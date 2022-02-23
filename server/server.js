@@ -1,68 +1,49 @@
-// ------ FILE FOR EXPRESS SERVER ------
-
-// Import Express module: 
 const express = require('express');
-// Assign express methods to "app" variable
 const app = express();
-// Import the path module:
 const path = require('path');
-// Import cookieParser for cookies & authentication features:
 const cookieParser = require('cookie-parser');
-// Import bodyParser:
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-// Import useControllers:
 const { verifyUser, createUser } = require('./controllers/userControllers.js');
 const { findStudentGoals } = require('./controllers/goalControllers.js');
 
-
-// Import mongoose modules:
-const mongoose = require('mongoose');
-// Connecting to Mongoose through Atlas hosting site: 
+// CHANGE URL BELOW!!
 const mongooseURI = 'mongodb+srv://marbleJarTeam:ilovemarbles@student-goal-tracker.zh4sx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 mongoose.connect(mongooseURI, {useNewUrlParser: false}, {useUnifiedTopology: true});
+mongoose.connection.once('open', () => console.log('Connected to MarbleJar Database'));
 // mongoose.connect(`${mongooseURI}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
-mongoose.connection.once('open', () => console.log('Connected to MarbleJar Database'));
 
-
-
-//----- PARCERS -----
-// Parcer for JSON requests:
 app.use(express.json());
-// Parcer for cookies:
 app.use(cookieParser());
 app.use(bodyParser());
-// Parcer for urlencoded requests:
 app.use(express.urlencoded()); // Best practice note: body-parser is deprecated for Express version 4.16+, use express.urlencoded() instead
 
 
-
 //----- LOGIN ROUTE HANDLER -----
-app.post('/api/login', verifyUser,
+app.post('/api/login', verifyUser, // ADD COOKIE MIDDLEWARE
   (req, res) => {
   // If login is unsuccessful, returns: {isLoggedIn: false, errorMessage}
   if (res.locals.loginError) res.status(401).json(res.locals.loginError);
-
   // If login is successful, returns: {isLoggedIn: true, userId, firstName}
   res.status(200).json(res.locals.loginResponse);
+  // HOW DOES THIS REDIRECT TO NEXT PAGE WITH THEIR LIST & JAR?
 });
-// add: middleware to generate a cookie upon successful login
-// add: middleware middleware that gets the correct student information from the database upon successful login
-//   would you want to redirect the student to their specific studentgoals view based upon their id?
-
 
 //----- LOGOUT ROUTE HANDLER -----
-app.post('/api/logout', (req, res) => res.status(200).send());
-  // some middleware to stop the current session maybe?
-  // would this just redirect the user to the login view again?
+app.post('/api/logout', (req, res) => {
+  // REDIRECT HERE FOR .GET WITH '/' ?
+  res.status(200).send()
+});
   
 
-//----- SIGNUP ROUTE HANDLER ----- (used for testing)
-app.post('/api/signup',
-  createUser,
-  (req, res) => res.status(200).json(res.locals.newUser));
+//----- SIGNUP ROUTE HANDLER ----- 
+app.post('/api/signup', createUser, (req, res) => {
+  // HANDLE ERRORS THAT CAN HAPPEN HERE
+  res.status(200).json(res.locals.newUser)
+});
   
-
 
 //----- GET STUDENT GOALS ROUTE HANDLER-----
 // http://localhost:3000/api/getStudentGoals?studentId='ID'
@@ -90,14 +71,12 @@ app.get('/api/getStudentGoals/:studentId',
 // });
 
 
-
 //----- LANDING PAGE ROUTE HANDLER -----
 // should be handeled by front end server
 app.get('/', (req, res) => {
   res.render('../client/index.html');
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'));
 });
-
 
 
 //----- GLOBAL ERROR HANDLER -----
