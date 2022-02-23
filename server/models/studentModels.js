@@ -9,6 +9,7 @@ const studentSchema = new Schema({
   lastName: {type: String, required: true},
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  // ADD SCHEMA FOR POINTERS TO GOALS ARRAY?
 });
 
 // create a collection instance of the model

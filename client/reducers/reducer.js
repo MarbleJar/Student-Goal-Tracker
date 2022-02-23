@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes';
 const initialUser =  {isLoggedIn: false, userId: null, firstName: null, username: '', password:  '', errorMessage: ''};
 // const initialUser =  {isLoggedIn: true, userId: null, firstName: 'Michael', username: '', password:  '', errorMessage: ''};
 
-// Comment out 
+// Comment out - this is where the tasks are currently coming from
 const sampleGoalsData = [{description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
  {description: "No talking during class", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
  {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
