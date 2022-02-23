@@ -22,15 +22,20 @@ class StudentGoals extends Component {
     //[{description: String, due_date: Date, status: String, _id}, ...]
     // Loop through array and render items
     const displayArray = [];
-    console.log(this.props.goalsData);
-   
+
     this.props.goalsData.forEach((element, index) => {
       let thisRow = <tr key={index} className = "TableRow">
-        <td>{element.description}</td>
-        <td>{element.due_date}</td>
-        <td>{element.status}</td>
-        <td><input className = "CheckBox" type = 'checkbox' onClick = {() => {this.props.markComplete(element._id, index)} }/></td>
-      </tr>
+                      <td>{element.description}</td>
+                      <td>{element.due_date}</td>
+                      <td>{element.status}</td>
+                      <td>
+                        <input 
+                          className = "CheckBox" 
+                          type = 'checkbox' 
+                          onClick = {() => {this.props.markComplete(element._id, index)} }
+                        />
+                      </td>
+                    </tr>
       displayArray.push(thisRow)
     })
 
