@@ -25,14 +25,18 @@ class StudentGoals extends Component {
 
     this.props.goalsData.forEach((element, index) => {
       let thisRow = <tr key={index} className = "TableRow">
+                      <td>{element.title}</td>
                       <td>{element.description}</td>
-                      <td>{element.due_date}</td>
-                      <td>{element.status}</td>
+                      <td>{element.dueDate}</td>
+                      <td>{`${element.status}`}</td>
                       <td>
                         <input 
                           className = "CheckBox" 
                           type = 'checkbox' 
-                          onClick = {() => {this.props.markComplete(element._id, index)} }
+                          onClick = {() => {
+                            //console.log('student data:', this.props.loginData.userId);
+                            this.props.markComplete(element._id, element.status, this.props.loginData.userId, index)
+                          } }
                         />
                       </td>
                     </tr>

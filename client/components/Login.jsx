@@ -3,30 +3,16 @@ import {connect} from 'react-redux';
 import * as types from '../constants/actionTypes.js';
 import * as actions from '../actions/actions';
 
-// async function onClickHandler (username, password) {
-//   const bodyData = {username: enteredUsername, password: enteredPassword}
-//     const requestOptions = {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(bodyData)
-//     };
-
-//     // console.log(bodyData)
-     
-//     // TO TEST WITH SERVER: Un-comment these two lines
-//     const serverResponse = await fetch('/api/login', requestOptions);
-//     let results = await serverResponse.json();
-//     console.log(results)
-//     // Testing use only
-//     // serverRespon
-//     processLogin(results)
-//   }
-
 class Login extends Component {
 
   render() {
  
     const { loginChange, loginData, processLogin } = this.props;
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+      processLogin(loginData.username, loginData.password)
+    };
 
     return(
       <div className = 'loginPage'>
@@ -42,7 +28,7 @@ class Login extends Component {
           onChange = {e => {loginChange(e.target.value, 'username')}}
           />
         </form>
-        <form className = 'password'>
+        <form className = 'password' onSubmit={onSubmit}>
           <input 
           className = "password-input" 
           type = 'password' 
@@ -50,13 +36,16 @@ class Login extends Component {
           placeholder = 'password' 
           value={loginData.password} 
           onChange = {e => {loginChange(e.target.value, 'password')}}
+          // onKeyPress = {handleKeyPress}
           />
         </form>
-        <button className = 'submit'
-          className = "submit-button" 
-          type="button"
-          onClick = {() => {processLogin(loginData.username, loginData.password)}}
-        >Submit</button>
+
+          <button className = 'submit'
+            className = "submit-button" 
+            type="submit"
+            onClick = {() => {processLogin(loginData.username, loginData.password)}}
+          >Submit</button>
+
       </div>
       );      
   }

@@ -15,7 +15,7 @@ export const processLogin = (enteredUsername, enteredPassword) => (dispatch) => 
       body: JSON.stringify(bodyData)
   };
 
-  console.log(bodyData)
+  //console.log(bodyData)
 
   fetch('/api/login', requestOptions)
       .then(results => results.json())
@@ -23,37 +23,34 @@ export const processLogin = (enteredUsername, enteredPassword) => (dispatch) => 
       .catch(e => console.log("error in processLogin", e));
 }
 
-export const processLogout = () => (dispatch) => {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  };
+// export const processLogout = () => (dispatch) => {
+//   const requestOptions = {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//   };
 
-  fetch('/api/logout', requestOptions)
-  .then(results => results.json())
-  .then(data => dispatch({
-    type: types.LOGGED_OUT,
-    payload: null
-  }));
-}
+//   fetch('/api/logout', requestOptions)
+//   .then(results => results.json())
+//   .then(data => dispatch({
+//     type: types.LOGGED_OUT,
+//     payload: null
+//   }));
+// }
 
 // PATCH /api/updateGoal/:goalId
 // {newStatus: String}
 // Expected response: {description: String, due_date: Date, status: String, _id} 
 
-export const markComplete = (goalId, index) => (dispatch) => {
-
+export const markComplete = (goalId, goalStatus, studentId, index) => (dispatch) => {
+  
   const requestOptions = {
-    method: 'PATCH',
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: {newStatus : 'Complete'}
+    body: JSON.stringify({status : goalStatus , _id : goalId}),
   };
 
-  // TO TEST WITH SERVER: Un-comment these two lines
-
-  fetch('/api/updateGoal/' + goalId, requestOptions)
+  fetch(`/api/switchStatus/${studentId}`, requestOptions)
   .then(results => results.json())
-  .then(results => console.log("markComplete fetch results", results))
   .then(results => dispatch({
     type: types.UPDATE_GOAL,
     payload: {response: results, index: index}
