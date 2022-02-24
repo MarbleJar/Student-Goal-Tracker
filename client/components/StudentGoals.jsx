@@ -13,12 +13,14 @@ class StudentGoals extends Component {
     const displayArray = [];
 
     this.props.goalsData.forEach((element, index) => {
-      let thisRow = <tr key={index} className = "TableRow">
-                      <td>{element.title}</td>
-                      <td>{element.description}</td>
-                      <td>{element.dueDate}</td>
-                      <td>{`${element.status}`}</td>
-                      <td>
+      let thisRow = <tr key={index} className = "TableContainer">
+                      <section className = "TableRow">
+                      <td><b>Goal:</b> {element.title}</td>
+                      <td><b>Description:</b>  {element.description}</td>
+                      <td><b>Due Date:</b>  {element.dueDate}</td>
+                      <td><b>Completion Status:</b> {`${element.status}`}</td>
+                      </section>
+                      <section className = "TableRow2">
                         <input 
                           className = "CheckBox" 
                           type = 'checkbox' 
@@ -26,19 +28,20 @@ class StudentGoals extends Component {
                             this.props.markComplete(element._id, element.status, this.props.loginData.userId, index)
                           } }
                         />
-                      </td>
-                      <td>
-                        <button onClick={() => this.props.deleteGoal(element._id, this.props.loginData.userId)}>X</button>
-                      </td>
+                        <td>
+                          <button onClick={() => this.props.deleteGoal(element._id, this.props.loginData.userId)}>X</button>
+                        </td>
+                      </section>
                     </tr>
       displayArray.push(thisRow)
     })
 
     // Return should include the array of table rows
     return(
-      <div> <h3 className = 'title'>Student Goals</h3>
+      <div> 
+        <h3 className = 'goal-title'>Student Goals</h3>
         <table className = "GoalTable">
-          <tbody>
+          <tbody className="table-body">
             {displayArray}
           </tbody>
         </table>

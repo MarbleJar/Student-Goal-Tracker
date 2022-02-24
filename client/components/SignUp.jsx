@@ -17,8 +17,8 @@ class SignUp extends Component {
       console.log("props", this.props)
       return(
         <div className = 'signupPage'>
-          <h1>Welcome To Marble Jar!</h1>
-          <h3>Please enter your details below to create your new account:</h3>
+          <h1 className= "loginh1">Welcome To Marble Jar!</h1>
+          <h3 className="loginh3">Please enter your details below to create your new account:</h3>
           <form className = 'signUpFirstName'>
             <input 
             className = "username-input" 

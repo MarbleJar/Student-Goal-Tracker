@@ -23,9 +23,10 @@ class MarbleJar extends Component {
 
     return(
 
-      <div className = 'title'>Class Status
+      <div className = 'title'>
+      <h4 className="jar-title">Marble Jar</h4>
       <div className = "graph-header">
-        Marble Jar
+        <h4 className="jar-status">Class Status</h4>
         <div className = "graph-outer">
           <div className = "graph-bar" style = {divStyle}>
             <div className = "graph-label">{Math.round(percent).toString()}%</div>

@@ -16,10 +16,11 @@ class Login extends Component {
 
     return(
       <div className = 'loginPage'>
-        <h1>Welcome Back!</h1>
-        <h2>Sign in Below to See Your Goals! </h2>
-        <h3>We are glad you are back! Please enter your details.</h3>
+        <h1 className = 'loginh1'>MarbleJar</h1>
+        <h3 className = 'loginh3'>Welcome Back! Please enter your details.</h3>
+        <h4 className = 'loginh4'>Sign in Below to See Your Goals!</h4>
         <form className = 'username'>
+          <h5 className = "loginh5">Username</h5>
           <input 
           className = "username-input" 
           type = 'text' 
@@ -30,6 +31,7 @@ class Login extends Component {
           />
         </form>
         <form className = 'password' onSubmit={onSubmit}>
+          <h5 className = "loginh5">Password</h5>
           <input 
           className = "password-input" 
           type = 'password' 
@@ -40,19 +42,16 @@ class Login extends Component {
           // onKeyPress = {handleKeyPress}
           />
         </form>
-
           <button className = 'submit'
             className = "submit-button" 
             type="submit"
             onClick = {() => {processLogin(loginData.username, loginData.password)}}
           >Submit</button>
-
-          <button className = 'submit'
-            className = "submit-button"
+          <button className = 'signUp'
+            className = "signUp-button" 
             type="submit"
             onClick = {() => {toggleSigningUp()}}
           >Sign Up</button>
-
       </div>
       );      
   }
