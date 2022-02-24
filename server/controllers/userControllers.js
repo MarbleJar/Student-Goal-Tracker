@@ -66,10 +66,12 @@ userController.createUser = (req, res, next) => {
     };
     // MAKE SURE IT'S NOT CREATING USER W/ EXISTING USERNAME - already required that it's unique in schema
     res.locals.newUser = {
+      // lastName: newUserEntry.lastName,
+      // username: newUserEntry.username,
+      // password: newUserEntry.password
+      isLoggedIn: true,
+      userId: newUserEntry._id,
       firtName: newUserEntry.firstName,
-      lastName: newUserEntry.lastName,
-      username: newUserEntry.username,
-      password: newUserEntry.password
     };
     return next()
   })

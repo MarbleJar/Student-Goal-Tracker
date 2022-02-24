@@ -12,7 +12,11 @@ import * as types from '../constants/actionTypes';
 const initialUser =  {isLoggedIn: false, signingUp: false, userId: null, firstName: null, username: '', password:  '', errorMessage: ''};
 // const initialUser =  {isLoggedIn: true, userId: null, firstName: 'Michael', username: '', password:  '', errorMessage: ''};
 
-// const signupUserDarta = {signingUp: false, signUpFirstName: null, signUpLastName: null, signUpUsername: '', signUpPassword:  '', errorMessage: ''}
+const signUpUserData = {signUpFirstName: '', signUpLastName: '', signUpUsername: '', signUpPassword:  ''}
+
+//add an action that turns signingUp to true and bring to sign up page
+//add an action to handle typing in sign-up boxes
+//add an action that processes clicking sign up and letting user into marble jar page
 
 // Comment out - this is where the tasks are currently coming from
 // const sampleGoalsData = [{description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
@@ -22,16 +26,17 @@ const initialUser =  {isLoggedIn: false, signingUp: false, userId: null, firstNa
 //  {description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
 // ]
 
-
 const initialState = {
   loginData: initialUser,
+  signUpUserData: signUpUserData,
   goalsData: [],
   classStatus: {totalPending: 0, totalComplete: 0}, 
   studentStatus: {totalPending: 0, totalComplete: 0}
 }
 
+
 const reducer = (state = initialState, action) => {
-  // console.log(state);
+  console.log("reducer invoked");
   switch (action.type) {
     case types.LOGIN_FIELD_CHANGE: {
       let loginData = {...state.loginData};
@@ -91,6 +96,54 @@ const reducer = (state = initialState, action) => {
         classStatus
       };
     }
+    case types.DELETE_GOAL: {
+      let goalsData = action.payload;
+      return {
+        ...state, 
+        goalsData
+      };
+    }
+
+    case types.SIGN_UP_FIELD_CHANGE: {
+      let signUpUserData = {...state.signUpUserData};
+      signUpUserData[action.payload.changedField] = action.payload.newValue;
+
+      return {
+        ...state,
+        signUpUserData
+      };
+    }
+
+    case types.TOGGLE_SIGNING_UP: {
+      let loginData = {...state.loginData};
+      loginData.signingUp = true;
+
+      return {
+        ...state,
+        loginData
+      }
+    }
+
+
+    case types.SIGN_UP_COMPLETE: {
+      let loginData = {...state.loginData};
+      let signUpData = {...state.signUpUserData}
+      signUpData.username = '';
+      signUpData.password = '';
+      loginData.isLoggedIn = action.payload.isLoggedIn;
+      loginData.userId = action.payload.userId;
+      loginData.firstName = action.payload.firstName;
+      // signupData.lastName = action.payload.lastName;
+
+      // loginData.errorMessage = action.payload.errorMessage;
+      return { 
+        ...state,
+        loginData, 
+        signUpData
+      };
+    }
+
+
 
     default: {
       return state;

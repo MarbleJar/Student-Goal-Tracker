@@ -3,15 +3,6 @@ import {connect} from 'react-redux';
 
 import * as actions from '../actions/actions';
 
-// const initialUser =  {isLoggedIn: false, userId: null, firstName: null, username: '', password:  '', errorMessage: ''};
-
-// const initialState = {
-//   loginData: initialUser,
-//   goalsData: [],
-//   classStatus: {totalPending: 0, totalComplete: 0}, 
-//   studentStatus: {totalPending: 0, totalComplete: 0}
-// }
-
 class StudentGoals extends Component {
 
   componentDidMount() {
@@ -19,8 +10,6 @@ class StudentGoals extends Component {
   }
 
   render() {
-    //[{description: String, due_date: Date, status: String, _id}, ...]
-    // Loop through array and render items
     const displayArray = [];
 
     this.props.goalsData.forEach((element, index) => {
@@ -34,16 +23,16 @@ class StudentGoals extends Component {
                           className = "CheckBox" 
                           type = 'checkbox' 
                           onClick = {() => {
-                            //console.log('student data:', this.props.loginData.userId);
                             this.props.markComplete(element._id, element.status, this.props.loginData.userId, index)
                           } }
                         />
                       </td>
+                      <td>
+                        <button onClick={() => this.props.deleteGoal(element._id, this.props.loginData.userId)}>X</button>
+                      </td>
                     </tr>
       displayArray.push(thisRow)
     })
-
-
 
     // Return should include the array of table rows
     return(
