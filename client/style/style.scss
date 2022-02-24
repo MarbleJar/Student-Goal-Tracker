@@ -177,6 +177,54 @@ body {
   width: 42vh;
   height: 83vh;
   justify-content: center;
+
+  .signUpFirstName{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    width: 15vw;
+    min-width: 300px;
+    height: 4vh;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 1.5vh;
+    padding: 1vw;
+  }
+
+  .signUpLastName{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    width: 15vw;
+    min-width: 300px;
+    height: 4vh;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 1.5vh;
+    padding: 1vw;
+  }
+
+  .signUpUsername{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    width: 15vw;
+    min-width: 300px;
+    height: 4vh;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 1.5vh;
+    padding: 1vw;
+  }
+
+  .signUpPassword{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    width: 15vw;
+    min-width: 300px;
+    height: 4vh;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 1.5vh;
+    padding: 1vw;
+  }
 }
 
 .StudentContainer{
