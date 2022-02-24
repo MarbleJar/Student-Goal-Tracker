@@ -17,25 +17,25 @@ const mapStateToProps = state => ({
   //
   
   const mapDispatchToProps = dispatch => ({
-    markComplete: (goalId, index) => {
-        dispatch(actions.markComplete(goalId, index));
+    markComplete: (goalId, goalStatus, studentId, index) => {
+        dispatch(actions.markComplete(goalId, goalStatus, studentId, index));
     },
-    getClassStatus: () => {
-        dispatch(actions.getClassStatus());
-    },
+    // getClassStatus: () => {
+    //     dispatch(actions.getClassStatus());
+    // },
     getGoals: (studentId) => {
         dispatch(actions.getGoals(studentId));
     },
-    processLogout: () => {
-        dispatch(actions.processLogout());
-    },
+    // processLogout: () => {
+    //     dispatch(actions.processLogout());
+    // },
   });
 
     const populatedGoals = () => this.props.getGoals(this.props.loginData.userId)
 class StudentContainer extends Component {
 
     render() {
-        console.log("student goals data", this.props.goalsData)
+        //console.log("student goals data", this.props.goalsData)
         return(
         <div className = 'StudentContainer'>
             We're logged in!!
@@ -44,10 +44,11 @@ class StudentContainer extends Component {
                 studentStatus = {this.props.studentStatus} 
                 markComplete = {this.props.markComplete} 
                 getGoals = {() => this.props.getGoals(this.props.loginData.userId)}
+                loginData = {this.props.loginData}
             />
             <MarbleJar  
                 classStatus = {this.props.classStatus} 
-                getClassStatus = {this.props.getClassStatus}
+                // getClassStatus = {this.props.getClassStatus}
              />
             
         </div>

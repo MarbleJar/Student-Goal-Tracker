@@ -41,10 +41,9 @@ goalController.addGoals = (req, res, next) => {
 }
 
 goalController.switchStatus = (req, res, next) => {
-  console.log("switch status middleware") 
   let { _id, status } = req.body // what is the title of this in mongoDB?
   status === false ? status=true : status=false;
-  console.log('new status', status);
+  //console.log('new status', status);
   Goal.updateOne( { _id}, {
       $set: {
         status: status

@@ -15,14 +15,14 @@ import * as actions from '../actions/actions';
 class MarbleJar extends Component {
   
   componentDidMount() {
-    this.props.getClassStatus();
+    // this.props.getClassStatus();
 
   }
 
   render() {
     // console.log(this.props.classStatus);
-    let percent = (this.props.classStatus.totalComplete / (this.props.classStatus.totalComplete + this.props.classStatus.totalPending))*100;
-
+    // let percent = (this.props.classStatus.totalComplete / (this.props.classStatus.totalComplete + this.props.classStatus.totalPending))*100;
+    let percent = 50;
 
     const divStyle = {
       height: percent+'%',

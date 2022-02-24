@@ -46,18 +46,17 @@ const reducer = (state = initialState, action) => {
         loginData
       };
     }
-    case types.LOGGED_OUT: {
-      let loginData = {...initialUser};
-      return {
-        ...state,
-        loginData
-      };
-    }
+    // case types.LOGGED_OUT: {
+    //   let loginData = {...initialUser};
+    //   return {
+    //     ...state,
+    //     loginData
+    //   };
+    // }
     case types.UPDATE_GOAL: {
 
-      let goalsData = [...state.goalsData];
-      goalsData[action.payload.index] = action.payload.response;
-
+      // let goalsData = [...state.goalsData];
+      let goalsData = action.payload.response;
       return {
         ...state,
         goalsData
