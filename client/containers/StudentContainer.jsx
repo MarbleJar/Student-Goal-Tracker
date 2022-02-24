@@ -38,7 +38,6 @@ class StudentContainer extends Component {
         //console.log("student goals data", this.props.goalsData)
         return(
         <div className = 'StudentContainer'>
-            We're logged in!!
              <StudentGoals 
                 goalsData = {this.props.goalsData} 
                 studentStatus = {this.props.studentStatus} 

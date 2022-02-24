@@ -37,7 +37,7 @@ class MainContainer extends Component {
     }
     else {
       return(
-      <div className = "MainContainer" > Sign in Below to See Your Goals!
+      <div className = "MainContainer" > 
         <Login 
           loginData = {this.props.loginData} 
           loginChange = {this.props.loginChange} 
