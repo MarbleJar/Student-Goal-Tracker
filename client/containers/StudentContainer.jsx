@@ -47,8 +47,7 @@ class StudentContainer extends Component {
                 loginData = {this.props.loginData}
             />
             <MarbleJar  
-                classStatus = {this.props.classStatus} 
-                // getClassStatus = {this.props.getClassStatus}
+                goalsData = {this.props.goalsData} 
              />
             
         </div>
