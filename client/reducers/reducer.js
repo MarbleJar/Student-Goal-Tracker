@@ -4,23 +4,23 @@ const initialUser =  {isLoggedIn: false, userId: null, firstName: null, username
 // const initialUser =  {isLoggedIn: true, userId: null, firstName: 'Michael', username: '', password:  '', errorMessage: ''};
 
 // Comment out - this is where the tasks are currently coming from
-const sampleGoalsData = [{description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
- {description: "No talking during class", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
- {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
- {description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
- {description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
-]
+// const sampleGoalsData = [{description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
+//  {description: "No talking during class", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
+//  {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
+//  {description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
+//  {description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},
+// ]
 
 
 const initialState = {
   loginData: initialUser,
-  goalsData: sampleGoalsData,
+  goalsData: [],
   classStatus: {totalPending: 0, totalComplete: 0}, 
   studentStatus: {totalPending: 0, totalComplete: 0}
 }
 
 const reducer = (state = initialState, action) => {
-  console.log(state);
+  // console.log(state);
   switch (action.type) {
     case types.LOGIN_FIELD_CHANGE: {
       let loginData = {...state.loginData};
@@ -32,7 +32,6 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-
     case types.LOGGED_IN: {
       let loginData = {...state.loginData};
       loginData.username = '';
@@ -40,7 +39,7 @@ const reducer = (state = initialState, action) => {
       loginData.isLoggedIn = action.payload.isLoggedIn;
       loginData.userId = action.payload.userId;
       loginData.firstName = action.payload.firstName;
-      loginData.errorMessage = action.payload.errorMessage;
+      // loginData.errorMessage = action.payload.errorMessage;
 
       return { 
         ...state,

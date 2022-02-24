@@ -1,55 +1,47 @@
 import * as types from '../constants/actionTypes';
 import regeneratorRuntime from "regenerator-runtime";
 
-export const editFieldActionCreator = (value, field) => ({
+export const loginChange = (value, field) => ({
   type: types.LOGIN_FIELD_CHANGE,
   payload: {newValue: value, changedField: field},
 });
 
-export const processLogin = async (dispatch, enteredUsername, enteredPassword) => {
-    const bodyData = {"username": enteredUsername, "password": enteredPassword}
-    const requestOptions = {
+export const processLogin = (enteredUsername, enteredPassword) => (dispatch) => {
+
+  let bodyData = {username: enteredUsername, password: enteredPassword}
+  let requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bodyData)
-    };
-  
-    let serverResponse
-    
-    // TO TEST WITH SERVER: Un-comment these two lines
-    serverResponse = await fetch('/api/login', requestOptions);
-    serverResponse = await serverResponse.json();
+  };
 
-    // Testing use only
-    // serverResponse  = {isLoggedIn: true, userId: 'test', firstName: 'John'}
+  console.log(bodyData)
 
-    dispatch({
-      type: types.LOGGED_IN,
-      payload: serverResponse
-    });
+  fetch('/api/login', requestOptions)
+      .then(results => results.json())
+      .then(results => dispatch({type: types.LOGGED_IN, payload: results}))
+      .catch(e => console.log("error in processLogin", e));
 }
 
-export const processLogout = async (dispatch) => {
-
+export const processLogout = () => (dispatch) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  // TO TEST WITH SERVER: Un-comment these two lines
-  const serverResponse = await fetch('/api/logout', requestOptions);
-
-  dispatch({
+  fetch('/api/logout', requestOptions)
+  .then(results => results.json())
+  .then(data => dispatch({
     type: types.LOGGED_OUT,
     payload: null
-  });
+  }));
 }
 
-//PATCH /api/updateGoal/:goalId
+// PATCH /api/updateGoal/:goalId
 // {newStatus: String}
 // Expected response: {description: String, due_date: Date, status: String, _id} 
 
-export const markComplete = async (dispatch, goalId, index) => {
+export const markComplete = (goalId, index) => (dispatch) => {
 
   const requestOptions = {
     method: 'PATCH',
@@ -58,56 +50,46 @@ export const markComplete = async (dispatch, goalId, index) => {
   };
 
   // TO TEST WITH SERVER: Un-comment these two lines
-  // const path = '/api/updateGoal/' + goalId
-  // let serverResponse = await fetch(path, requestOptions);
-  // serverResponse = await serverResponse.json();
 
-  // Fake server reponse for testing
-  let serverResponse = {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Complete', _id: 'abcd'};
-
-  // Pull updated class status to update state
-  getClassStatus(dispatch);
-
-  dispatch({
+  fetch('/api/updateGoal/' + goalId, requestOptions)
+  .then(results => results.json())
+  .then(results => console.log("markComplete fetch results", results))
+  .then(results => dispatch({
     type: types.UPDATE_GOAL,
-    payload: {response: serverResponse, index: index}
-  });
-
+    payload: {response: results, index: index}
+  }))
+  .catch(e => console.log('error in markComplete: ', e));
+  // // Fake server reponse for testing
+  // let serverResponse = {description: "Clean up after lunch", due_date: '2021-02-15', status: 'Complete', _id: 'abcd'};
 }
 
-export const getClassStatus = async (dispatch) => {
+export const getClassStatus = () => (dispatch) => {
   
-  // TO TEST WITH SERVER: Un-comment these two lines
-  // const path = '/api/getClassProgress/'
-  // let serverResponse = await fetch(path);
-  // serverResponse = await serverResponse.json();
+  fetch('/api/getClassProgress/')
+  .then(response => response.json())
+  .then(data => dispatch({
+    type: types.GET_CLASS,
+    payload: {response: data}
+  }));
   
 
   // Fake server reponse for testing
-  let serverResponse = {totalPending: 50, totalComplete: 100};
-
-  dispatch({
-    type: types.GET_CLASS,
-    payload: {response: serverResponse}
-  });
+  // let serverResponse = {totalPending: 50, totalComplete: 100};
 
 }
 
-export const getGoals = async(dispatch, studentId) => {
+export const getGoals = (studentId) => (dispatch) => {
 
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  console.log(studentId);
-  const path = '/api/getStudentGoals/' + studentId;
-  let serverResponse = await fetch(path);
-  console.log("GOALS SERVER RESPONSE");
-  console.log(serverResponse);
-  serverResponse = await serverResponse.json();
 
-  dispatch({
+  fetch('/api/getStudentGoals/' + studentId)
+  .then(response => response.json())
+  .then(data => dispatch({
     type: types.GET_GOALS,
-    payload: serverResponse
-  })
+    payload: data
+  }))
+  .catch(e => console.log("error in getGoals", e));
 }

@@ -20,7 +20,7 @@ class MarbleJar extends Component {
   }
 
   render() {
-    console.log(this.props.classStatus);
+    // console.log(this.props.classStatus);
     let percent = (this.props.classStatus.totalComplete / (this.props.classStatus.totalComplete + this.props.classStatus.totalPending))*100;
 
 

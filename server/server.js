@@ -72,20 +72,20 @@ app.delete('/api/deleteGoal/:studentID', deleteGoal, findStudentGoals, (req, res
   res.status(200).json(res.locals.goalsResponse);
 })
 
-//** UPDATE STUDENT INFO */
-// http://localhost:3000/api/updateGoal?goalId='ID'
+// //** UPDATE STUDENT INFO */
+// // http://localhost:3000/api/updateGoal?goalId='ID'
 // app.put('/api/updateGoal/:goalId', 
 //   // middleware to update student's goals 
 //   (req, res) => {
 //   res.status(200).json();
 // });
 
-//** GET CLASS PROGRESS */
-// http://localhost:3000/api/getClassProgress
+// //** GET CLASS PROGRESS */
+// // http://localhost:3000/api/getClassProgress
 // app.get('/api/getClassProgress', 
 //   // middleware
 //   (req, res) => {
-//   res.status(200).json();
+//   res.status(200).json("hello");
 // });
 
 

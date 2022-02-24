@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   //Entry point for webpack to initiate compiling
@@ -34,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"], 
+        use: [MiniCssExtractPlugin.loader, "style-loader", "css-loader"], 
       },
       {
         test: /\.html?$/,
@@ -67,6 +68,7 @@ module.exports = {
       // title: 'Development',
       template: './client/index.html' //might need resolve(__dirname, client/)
     }),
+    new MiniCssExtractPlugin(),
   ],
   devServer: {
     host: 'localhost',
