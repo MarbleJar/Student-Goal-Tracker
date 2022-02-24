@@ -3,26 +3,18 @@ import {connect} from 'react-redux';
 
 import * as actions from '../actions/actions';
 
-// const initialUser =  {isLoggedIn: false, userId: null, firstName: null, username: '', password:  '', errorMessage: ''};
-
-// const initialState = {
-//   loginData: initialUser,
-//   goalsData: [],
-//   classStatus: {totalPending: 0, totalComplete: 0}, 
-//   studentStatus: {totalPending: 0, totalComplete: 0}
-// }
 
 class MarbleJar extends Component {
-  
-  componentDidMount() {
-    // this.props.getClassStatus();
-
-  }
 
   render() {
-    // console.log(this.props.classStatus);
-    // let percent = (this.props.classStatus.totalComplete / (this.props.classStatus.totalComplete + this.props.classStatus.totalPending))*100;
-    let percent = 50;
+    
+    let counter = 0;
+    for (let i = 0; i < this.props.goalsData.length; i++){
+      if (this.props.goalsData[i].status) counter++;
+    }
+
+
+    let percent = (counter / this.props.goalsData.length) * 100;
 
     const divStyle = {
       height: percent+'%',
