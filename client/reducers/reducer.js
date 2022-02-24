@@ -1,7 +1,18 @@
 import * as types from '../constants/actionTypes';
 
-const initialUser =  {isLoggedIn: false, userId: null, firstName: null, username: '', password:  '', errorMessage: ''};
+//isLoggedIn
+  //1 - log in page
+  //2 - sign up page
+  //3 - actual marble jar page
+
+  //if isLoggedIn is ever true, go to marble page
+  //if isLoggedIn and signingUp are false, stay at login page
+  //if signingUp is true, go to signUp
+
+const initialUser =  {isLoggedIn: false, signingUp: false, userId: null, firstName: null, username: '', password:  '', errorMessage: ''};
 // const initialUser =  {isLoggedIn: true, userId: null, firstName: 'Michael', username: '', password:  '', errorMessage: ''};
+
+// const signupUserDarta = {signingUp: false, signUpFirstName: null, signUpLastName: null, signUpUsername: '', signUpPassword:  '', errorMessage: ''}
 
 // Comment out - this is where the tasks are currently coming from
 // const sampleGoalsData = [{description: "Read 3 books", due_date: '2021-02-15', status: 'Pending', _id: 'abcd'},

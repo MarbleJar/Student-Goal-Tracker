@@ -24,6 +24,9 @@ const mapDispatchToProps = dispatch => ({
 
 //conditionally render Student Goals and MarbleJar if logged in
 class MainContainer extends Component {
+   //if isLoggedIn is ever true, go to marble page
+  //if isLoggedIn and signingUp are false, stay at login page
+  //if signingUp is true, go to signUp
   render() {
     if (this.props.loginData.isLoggedIn) {
       return (
