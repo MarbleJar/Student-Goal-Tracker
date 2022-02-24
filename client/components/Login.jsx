@@ -3,24 +3,24 @@ import {connect} from 'react-redux';
 import * as types from '../constants/actionTypes.js';
 import * as actions from '../actions/actions';
 
-async function onClickHandler (username, password) {
-  const bodyData = {username: enteredUsername, password: enteredPassword}
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(bodyData)
-    };
+// async function onClickHandler (username, password) {
+//   const bodyData = {username: enteredUsername, password: enteredPassword}
+//     const requestOptions = {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(bodyData)
+//     };
 
-    // console.log(bodyData)
+//     // console.log(bodyData)
      
-    // TO TEST WITH SERVER: Un-comment these two lines
-    const serverResponse = await fetch('/api/login', requestOptions);
-    let results = await serverResponse.json();
-    console.log(results)
-    // Testing use only
-    // serverRespon
-    processLogin(results)
-  }
+//     // TO TEST WITH SERVER: Un-comment these two lines
+//     const serverResponse = await fetch('/api/login', requestOptions);
+//     let results = await serverResponse.json();
+//     console.log(results)
+//     // Testing use only
+//     // serverRespon
+//     processLogin(results)
+//   }
 
 class Login extends Component {
 
