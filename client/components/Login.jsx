@@ -28,6 +28,11 @@ class Login extends Component {
  
     const { loginChange, loginData, processLogin } = this.props;
 
+    const onSubmit = (e) => {
+      e.preventDefault();
+      processLogin(loginData.username, loginData.password)
+    };
+
     return(
       <div className = 'loginPage'>
         <h1>Welcome Back!</h1>
@@ -42,7 +47,7 @@ class Login extends Component {
           onChange = {e => {loginChange(e.target.value, 'username')}}
           />
         </form>
-        <form className = 'password'>
+        <form className = 'password' onSubmit={onSubmit}>
           <input 
           className = "password-input" 
           type = 'password' 
@@ -52,11 +57,11 @@ class Login extends Component {
           onChange = {e => {loginChange(e.target.value, 'password')}}
           />
         </form>
-        <button className = 'submit'
-          className = "submit-button" 
-          type="button"
-          onClick = {() => {processLogin(loginData.username, loginData.password)}}
-        >Submit</button>
+          <button className = 'submit'
+            className = "submit-button" 
+            type="submit"
+            onClick = {() => {processLogin(loginData.username, loginData.password)}}
+          >Submit</button>
       </div>
       );      
   }
