@@ -9,6 +9,9 @@ class SignUp extends Component {
    
       const { loginChange, loginData, processLogin } = this.props; // CHANGE TO NEW STATE DATA/METHODS
       // new state
+      //processSignUp is an action creator - triggers interaction with back-end to add a user to DB (also triggers loginData.isLoggedIn to be true)
+      //signUpChange is an action creator - alters state but never goes to the back-end
+      //signUpData is stored in state and used here to grab all sign up info, but eventually that is transferred to the label 'loginData' in reducer
 
       return(
         <div className = 'signupPage'>
