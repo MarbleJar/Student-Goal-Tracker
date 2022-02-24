@@ -4,3 +4,7 @@ export const UPDATE_GOAL = "UPDATE_GOAL";
 export const GET_GOALS = "GET_GOALS";
 export const GET_CLASS = "GET_CLASS";
 export const LOGIN_FIELD_CHANGE = "LOGIN_FIELD_CHANGE";
+export const SIGN_UP_FIELD_CHANGE = "SIGN_UP_FIELD_CHANGE"
+export const TOGGLE_SIGNING_UP = "TOGGLE_SIGNING_UP";
+export const SIGN_UP_COMPLETE = "SIGN_UP_COMPLETE";
+export const DELETE_GOAL = "DELETE_GOAL";

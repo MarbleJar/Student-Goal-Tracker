@@ -7,7 +7,7 @@ class Login extends Component {
 
   render() {
  
-    const { loginChange, loginData, processLogin } = this.props;
+    const { loginChange, loginData, processLogin, toggleSigningUp } = this.props;
 
     const onSubmit = (e) => {
       e.preventDefault();
@@ -47,6 +47,11 @@ class Login extends Component {
             type="submit"
             onClick = {() => {processLogin(loginData.username, loginData.password)}}
           >Submit</button>
+          <button className = 'signUp'
+            className = "signUp-button" 
+            type="submit"
+            onClick = {() => {toggleSigningUp()}}
+          >Sign Up</button>
       </div>
       );      
   }

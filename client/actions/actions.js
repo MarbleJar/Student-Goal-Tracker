@@ -90,3 +90,51 @@ export const getGoals = (studentId) => (dispatch) => {
   }))
   .catch(e => console.log("error in getGoals", e));
 }
+
+export const deleteGoal = (goalId, studentId) => (dispatch) => {
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({_id: goalId}),
+  };
+
+  fetch(`/api/deleteGoal/${studentId}`, requestOptions)
+  .then(response => response.json())
+  .then(data => {
+    dispatch({
+    type: types.DELETE_GOAL,
+    payload: data
+    })
+  })
+  .catch(e => console.log("error in getGoals", e));
+}
+
+
+export const signUpFieldChange = (value, field) => ({
+  type: types.SIGN_UP_FIELD_CHANGE,
+  payload: {newValue: value, changedField: field},
+});
+
+
+export const toggleSigningUp = () => ({
+  type: types.TOGGLE_SIGNING_UP,
+})
+
+
+export const processSignUp = (enteredUsername, enteredPassword, enteredFirstName, enteredLastName) => (dispatch) => {
+
+  let bodyData = {username: enteredUsername, password: enteredPassword, firstName: enteredFirstName, lastName: enteredLastName}
+  let requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bodyData)
+  };
+
+  //console.log(bodyData)
+
+  fetch('/api/signup', requestOptions) // CHANGE THIS URL
+      .then(results => results.json())
+      .then(results => dispatch({type: types.SIGN_UP_COMPLETE, payload: results}))
+      .catch(e => console.log("error in processSignUp", e));
+}

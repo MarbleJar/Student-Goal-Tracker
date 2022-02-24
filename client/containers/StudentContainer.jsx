@@ -13,29 +13,24 @@ const mapStateToProps = state => ({
     studentStatus: state.studentStatus
   });
   
-  //Marble Jar is given class data, presumably so percentage reflects entire class accomplishment
-  //
-  
   const mapDispatchToProps = dispatch => ({
     markComplete: (goalId, goalStatus, studentId, index) => {
         dispatch(actions.markComplete(goalId, goalStatus, studentId, index));
     },
-    // getClassStatus: () => {
-    //     dispatch(actions.getClassStatus());
-    // },
+    deleteGoal: (goalId, studentId) => {
+        dispatch(actions.deleteGoal(goalId, studentId));
+    },
     getGoals: (studentId) => {
         dispatch(actions.getGoals(studentId));
     },
-    // processLogout: () => {
-    //     dispatch(actions.processLogout());
+    // addGoal: () => {
+    //     dispatch(actions.addGoal());
     // },
   });
 
-    const populatedGoals = () => this.props.getGoals(this.props.loginData.userId)
 class StudentContainer extends Component {
 
     render() {
-        //console.log("student goals data", this.props.goalsData)
         return(
         <div className = 'StudentContainer'>
              <StudentGoals 
@@ -44,6 +39,8 @@ class StudentContainer extends Component {
                 markComplete = {this.props.markComplete} 
                 getGoals = {() => this.props.getGoals(this.props.loginData.userId)}
                 loginData = {this.props.loginData}
+                deleteGoal = {this.props.deleteGoal}
+                // addGoal = {this.props.addGoal}
             />
             <MarbleJar  
                 goalsData = {this.props.goalsData} 
