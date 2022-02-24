@@ -40,4 +40,29 @@ goalController.addGoals = (req, res, next) => {
     // check for an error, if not then next()
 }
 
+goalController.switchStatus = (req, res, next) => {
+  console.log("switch status middleware") 
+  let { _id, status } = req.body // what is the title of this in mongoDB?
+  status === false ? status=true : status=false;
+  console.log('new status', status);
+  Goal.updateOne( { _id}, {
+      $set: {
+        status: status
+      }
+    }, (err, data) => {
+      if (err) return next("messed up switching")
+      return next();
+  })
+}
+
+goalController.deleteGoal = (req, res, next) => {
+  console.log('delete goal middleware reached');
+  const { _id } = req.body;
+  Goal.findOneAndDelete({_id}, (err, data) =>{
+    if (err) return next('failed to delete goal');
+    return next();
+  })
+}
+
+
 module.exports = goalController;
